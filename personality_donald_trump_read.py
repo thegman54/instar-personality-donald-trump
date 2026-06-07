@@ -292,20 +292,48 @@ class PersonalityDonaldTrumpReadTool(BaseTool):
 
                     result["reactions"] = reactions
 
-            # Log activity
+            # Log activity — full payload so cockpit can show what was returned
             try:
                 from ...db import log_tool_activity
+
+                # Build detail with the full returned data
+                detail = {
+                    "categories": cat_list,
+                    "situation": situation or None,
+                    "trait_count": result['trait_count'],
+                    "traits": {
+                        cat: [t["content"] for t in entries]
+                        for cat, entries in traits.items()
+                    },
+                }
+                if "quotes" in result:
+                    detail["quotes"] = [
+                        {"quote": q["quote"][:120], "source": q.get("source")}
+                        for q in result["quotes"]
+                    ]
+                if "lexicon" in result:
+                    detail["lexicon"] = {
+                        utype: [e["word"] for e in entries]
+                        for utype, entries in result["lexicon"].items()
+                    }
+                if "reactions" in result:
+                    detail["reactions"] = {
+                        ttype: [r["trigger"] for r in entries]
+                        for ttype, entries in result["reactions"].items()
+                    }
+
+                parts = [f"{result['trait_count']} traits"]
+                if "quotes" in result:
+                    parts.append(f"{len(result['quotes'])} quotes")
+                if "lexicon" in result:
+                    parts.append(f"{sum(len(v) for v in result['lexicon'].values())} words")
+                if "reactions" in result:
+                    parts.append(f"{sum(len(v) for v in result['reactions'].values())} reactions")
+
                 await log_tool_activity(
                     tool_name="personality_donald_trump_read",
-                    summary=f"Loaded {result['trait_count']} traits for: {', '.join(cat_list)}",
-                    detail={
-                        "categories": cat_list,
-                        "situation": situation or None,
-                        "traits": result['trait_count'],
-                        "quotes": len(result.get('quotes', [])),
-                        "lexicon_types": list(result.get('lexicon', {}).keys()),
-                        "reaction_types": list(result.get('reactions', {}).keys()),
-                    },
+                    summary=f"Loaded {', '.join(parts)} for: {', '.join(cat_list)}",
+                    detail=detail,
                     profile_slug=profile_slug,
                     session_id=getattr(self, '_session_id', None),
                 )
