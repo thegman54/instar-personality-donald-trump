@@ -1,9 +1,6 @@
 name: personality_donald_trump
 display_name: Donald Trump
-description: >-
-  Comprehensive personality engine for Donald Trump — 18-category, 6-layer
-  trait system with vocabulary fingerprinting, reaction mappings, and quote
-  references for authentic voice reproduction.
+description: "Comprehensive personality engine for Donald Trump with 18-category, 6-layer trait system, vocabulary fingerprinting, reaction mappings, and quote references for authentic voice reproduction."
 type: personality
 category: Personality
 icon: megaphone
