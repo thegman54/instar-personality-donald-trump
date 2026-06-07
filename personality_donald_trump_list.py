@@ -53,7 +53,7 @@ class PersonalityDonaldTrumpListTool(BaseTool):
         if not pool:
             return ToolResult.fail("Database not available")
 
-        profile_slug = getattr(self, '_profile_slug', None) or "default"
+        profile_slug = "default"
 
         try:
             async with pool.acquire() as conn:

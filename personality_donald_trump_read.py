@@ -117,7 +117,7 @@ class PersonalityDonaldTrumpReadTool(BaseTool):
         if not pool:
             return ToolResult.fail("Database not available")
 
-        profile_slug = getattr(self, '_profile_slug', None) or "default"
+        profile_slug = "default"
         cat_list = [c.strip() for c in categories.split(",") if c.strip()]
         tags = [t.strip() for t in situation.split(",") if t.strip()] if situation else []
 
