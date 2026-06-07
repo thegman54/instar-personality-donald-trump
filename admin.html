@@ -493,8 +493,8 @@ function trumpAdmin() {
         get traitCount() { return this.traits.length; },
 
         init() {
-            this.slug = this.$el.closest('[data-admin-slug]')?.dataset.adminSlug || '';
-            if (this.slug) this.loadAll();
+            this.slug = 'default';
+            this.loadAll();
         },
 
         filterCategories() {
