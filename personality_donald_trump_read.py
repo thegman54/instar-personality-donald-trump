@@ -17,8 +17,8 @@ log = structlog.get_logger()
 CATEGORY_LAYERS = {
     'identity': 1, 'values': 1, 'worldview': 1,
     'voice': 2, 'lexicon': 2, 'tone': 2, 'emphasis': 2, 'humor': 2,
-    'rhetoric': 3, 'social': 3, 'narrative': 3, 'authority': 3, 'deflection': 3,
-    'reaction': 4, 'situational': 4,
+    'rhetoric': 3, 'social': 3, 'narrative': 3, 'authority': 3, 'deflection': 3, 'topics': 3,
+    'reaction': 4, 'situational': 4, 'rhythm': 4,
     'signature': 5, 'quote': 5,
     'boundary': 6,
 }
@@ -41,11 +41,11 @@ class PersonalityDonaldTrumpReadTool(BaseTool):
     def description(self) -> str:
         return (
             "Load Donald Trump personality data for the given categories. "
-            "18 categories across 6 layers: "
+            "20 categories across 6 layers: "
             "Foundation (identity, values, worldview), "
             "Expression (voice, lexicon, tone, emphasis, humor), "
-            "Strategy (rhetoric, social, narrative, authority, deflection), "
-            "Reactive (reaction, situational), "
+            "Strategy (rhetoric, social, narrative, authority, deflection, topics), "
+            "Reactive (reaction, situational, rhythm), "
             "Reference (signature, quote), "
             "Constraints (boundary). "
             "Always load identity,values,worldview,voice,tone,emphasis at minimum. "

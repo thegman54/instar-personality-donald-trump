@@ -25,14 +25,63 @@ layers:
     categories: [voice, lexicon, tone, emphasis, humor]
     description: How every response is shaped — sentence structure, vocabulary, energy
   - name: Strategy
-    categories: [rhetoric, social, narrative, authority, deflection]
-    description: How interactions are conducted — persuasion, power dynamics, storytelling
+    categories: [rhetoric, social, narrative, authority, deflection, topics]
+    description: How interactions are conducted — persuasion, power dynamics, storytelling, signature topics
   - name: Reactive
-    categories: [reaction, situational]
-    description: Triggered by conversational context — criticism, praise, challenges
+    categories: [reaction, situational, rhythm]
+    description: Triggered by conversational context — criticism, praise, challenges, speech flow patterns
   - name: Reference
     categories: [signature, quote]
     description: Concrete source material — catchphrases, actual quotes to draw from
   - name: Constraints
     categories: [boundary]
     description: Guardrails and limits on the persona
+
+# What this skill contributes to the compiled CLAUDE.md for any bot using it.
+# The builder reads this section and injects it — the skill owns its own documentation.
+claudemd:
+  core_categories: [identity, values, worldview, voice, tone, emphasis]
+  category_descriptions:
+    identity: "Core self-concept — who they believe they are, origin story, claimed roles"
+    values: "Non-negotiable beliefs — what they reward, punish, sacrifice for"
+    worldview: "Lens on reality — fair vs rigged, trust vs suspicion, rising vs declining"
+    voice: "Sentence structure — length, fragments, complexity, self-interruption patterns"
+    lexicon: "Vocabulary fingerprint — favored words, verbal tics, avoided language"
+    tone: "Energy and register — formal/casual, confident/hedging, warm/cold per context"
+    emphasis: "How key points are highlighted — repetition, caps, volume, punctuation"
+    humor: "Comedy style — self/other-deprecating, weapon vs connection, what's never funny"
+    rhetoric: "Persuasion mechanics — evidence vs emotion, binary framing, counter-argument handling"
+    social: "Relationship dynamics — ally vs enemy treatment, name-dropping, flattery, dominance"
+    narrative: "Story role — hero, victim, prophet, underdog; anecdote structure and moral template"
+    authority: "Credibility moves — credentials, experience, wealth, expertise claims"
+    deflection: "Evasion tactics — subject changes, attack-the-questioner, whataboutism, zone flooding"
+    topics: "Gravitational subjects — what they always pivot to regardless of context"
+    reaction: "Trigger responses — how they handle criticism, praise, challenge, confusion, victory"
+    situational: "Context-dependent modes — interview vs casual, written vs spoken, high vs low stakes"
+    rhythm: "Speech flow mechanics — tangent engine, callbacks, sentence cadence, register switching"
+    signature: "Catchphrases and verbal signatures with frequency and context"
+    quote: "Actual quotations with source, context, and paraphrase permissions"
+    boundary: "Hard guardrails — what the persona never does, even under pressure"
+  loading_guidance: |
+    Load identity, values, worldview, voice, tone, emphasis on every new conversation.
+    Add categories based on conversational context:
+    - Debate or argument → rhetoric, authority, deflection
+    - Telling stories → narrative, social
+    - Reacting to something → reaction, situational
+    - Extended monologue → rhythm, topics
+    - Needing specific phrases → signature, lexicon
+    - Quote needed → quote
+    Max 6 categories per call. Split across calls if needed.
+  weight: |
+    Personality traits shape HOW you deliver — tone, phrasing, attitude, rhythm.
+    They do NOT change WHAT you answer. Expert knowledge always takes priority.
+  auxiliary_stores:
+    - name: quotes
+      description: "Actual things the person said — source, context, when to use, paraphrase flag"
+      load_flag: include_quotes
+    - name: lexicon
+      description: "Vocabulary fingerprint — favored/avoided words with frequency and context"
+      load_flag: include_lexicon
+    - name: reactions
+      description: "Trigger→response mappings with intensity, sub-triggers via tags"
+      load_flag: include_reactions

@@ -25,8 +25,8 @@ TABLE_PREFIX = "personality_donald_trump"
 CATEGORY_LAYERS = {
     'identity': 1, 'values': 1, 'worldview': 1,
     'voice': 2, 'lexicon': 2, 'tone': 2, 'emphasis': 2, 'humor': 2,
-    'rhetoric': 3, 'social': 3, 'narrative': 3, 'authority': 3, 'deflection': 3,
-    'reaction': 4, 'situational': 4,
+    'rhetoric': 3, 'social': 3, 'narrative': 3, 'authority': 3, 'deflection': 3, 'topics': 3,
+    'reaction': 4, 'situational': 4, 'rhythm': 4,
     'signature': 5, 'quote': 5,
     'boundary': 6,
 }
